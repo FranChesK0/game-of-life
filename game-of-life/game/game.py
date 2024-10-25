@@ -9,12 +9,19 @@ class GameOfLife(metaclass=SingletonMeta):
     def __init__(self, width: int = 20, height: int = 20) -> None:
         self.__width = width
         self.__height = height
+        self.__life_count = 0
 
         self.__world: List[List[bool]] = []
         self.generate_world()
 
     def __repr__(self) -> str:
-        return f"GameOfLife<{id(self)}>[width:{self.__width}, height:{self.__height}]"
+        return (
+            f"GameOfLife<{id(self)}>["
+            f"width:{self.__width}, "
+            f"height:{self.__height}, "
+            f"life_count:{self.__life_count}"
+            "]"
+        )
 
     def __str__(self) -> str:
         return self.__repr__()
@@ -22,6 +29,10 @@ class GameOfLife(metaclass=SingletonMeta):
     @property
     def world(self) -> List[List[bool]]:
         return self.__world
+
+    @property
+    def life_count(self) -> int:
+        return self.__life_count
 
     def generate_world(self) -> None:
         self.__world = [
@@ -50,6 +61,7 @@ class GameOfLife(metaclass=SingletonMeta):
                     new_world[i][j] = False
 
         self.__world = new_world
+        self.__life_count += 1
         logger.debug(f"world updated: {self}")
 
     @staticmethod
