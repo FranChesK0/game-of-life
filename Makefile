@@ -2,7 +2,7 @@
 lint:
 	isort .
 	black .
-	flake .
+	flake8 .
 	mypy .
 
 .PHONY: pc
