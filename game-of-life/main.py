@@ -4,6 +4,7 @@ from core import config
 from game import GameOfLife
 
 app = Flask(__name__)
+app.jinja_env.filters["zip"] = zip
 
 
 @app.route("/")
@@ -16,7 +17,12 @@ def index() -> str:
 def live() -> str:
     game = GameOfLife()
     game.form_new_generation()
-    return render_template("live.html", world=game.world)
+    return render_template(
+        "live.html",
+        life_count=game.life_count,
+        world=game.world,
+        prev_world=game.previous_world,
+    )
 
 
 if __name__ == "__main__":

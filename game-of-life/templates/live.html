@@ -4,12 +4,15 @@
     <a class="btn btn-warning home" href="{{ url_for('index') }}">Home</a>
     <a class="btn btn-info refresh" href="{{ url_for('live') }}">Refresh</a>
 
+    <div class="counter">{{ life_count }}</div>
     <table class="world">
-        {% for row in world %}
+        {% for row, prev_row in world|zip(prev_world) %}
             <tr>
-                {% for cell in row %}
+                {% for cell, prev_cell in row|zip(prev_row) %}
                     {% if cell %}
                         <td class="cell living-cell"></td>
+                    {% elif not cell and prev_cell %}
+                        <td class="cell dead-cell"></td>
                     {% else %}
                         <td class="cell"></td>
                     {% endif %}
