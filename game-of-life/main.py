@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 
+from core import config
 from game import GameOfLife
 
 app = Flask(__name__)
@@ -19,4 +20,4 @@ def live() -> str:
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000, debug=True)
+    app.run(host=config.addr, port=config.port, debug=config.debug)
