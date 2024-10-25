@@ -8,7 +8,18 @@ class GameOfLife(metaclass=SingletonMeta):
     def __init__(self, width: int = 20, height: int = 20) -> None:
         self.__width = width
         self.__height = height
+
+        self.__world: List[List[bool]] = []
         self.generate_world()
+
+    def __repr__(self) -> str:
+        return f"""
+        width: {self.__width}
+        height: {self.__height}
+        """
+
+    def __str__(self) -> str:
+        return self.__repr__()
 
     @property
     def world(self) -> List[List[bool]]:
@@ -16,7 +27,7 @@ class GameOfLife(metaclass=SingletonMeta):
 
     def generate_world(self) -> None:
         self.__world = [
-            [bool(random.randint(0, 1) for _ in range(self.__width))]
+            [bool(random.randint(0, 1)) for _ in range(self.__width)]
             for _ in range(self.__height)
         ]
 
