@@ -8,3 +8,9 @@ lint:
 .PHONY: pc
 pc:
 	pre-commit run --all-files
+
+.PHONY: run
+run:
+	python game-of-life/main.py
+
+.DEFAULT_GOAL := run
