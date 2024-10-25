@@ -13,4 +13,8 @@ pc:
 run:
 	python game-of-life/main.py
 
+.PHONY: debug
+debug:
+	python game-of-life/main.py --debug
+
 .DEFAULT_GOAL := run
