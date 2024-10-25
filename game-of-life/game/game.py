@@ -1,6 +1,7 @@
 import random
 from typing import List, Tuple, Optional
 
+from core import logger
 from utils import SingletonMeta
 
 
@@ -30,6 +31,7 @@ class GameOfLife(metaclass=SingletonMeta):
             [bool(random.randint(0, 1)) for _ in range(self.__width)]
             for _ in range(self.__height)
         ]
+        logger.debug(f"world generated: {self}")
 
     def form_new_generation(self) -> None:
         world = self.world
@@ -51,6 +53,7 @@ class GameOfLife(metaclass=SingletonMeta):
                     new_world[i][j] = False
 
         self.__world = new_world
+        logger.debug(f"world updated: {self}")
 
     @staticmethod
     def __get_near(
