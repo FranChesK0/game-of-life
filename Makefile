@@ -9,6 +9,10 @@ lint:
 pc:
 	pre-commit run --all-files
 
+.PHONY: test
+test:
+	pytest
+
 .PHONY: run
 run:
 	python game-of-life/main.py

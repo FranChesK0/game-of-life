@@ -12,7 +12,7 @@ pip install -r requirements.txt
 poetry install
 ```
 
-You could specify address and port with env variables: `GAME_OF_LIFE_ADDRESS` and `GAME_OF_LIFE_PORT`.
+You could specify address and port with env variables: `GAME_OF_LIFE_ADDR` and `GAME_OF_LIFE_PORT`.
 
 Run the app:
 - with `make`:

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "game-of-life"
-version = "0.1.0"
+version = "0.1.1"
 description = "Game of Life written in Python and Flask framework"
 authors = ["FranChesKo"]
 license = "MIT license"
@@ -20,6 +20,7 @@ flake8-pyproject = "^1.2.3"
 isort = "^5.13.2"
 mypy = "^1.13.0"
 pre-commit = "^4.0.1"
+pytest = "^8.3.3"
 
 
 [tool.black]
@@ -52,6 +53,12 @@ warn_return_any = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 show_error_codes = true
+
+[tool.pytest.ini_options]
+pythonpath = ["game-of-life"]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = ["--import-mode=importlib"]
 
 
 [build-system]

@@ -13,12 +13,12 @@ def index() -> str:
     return render_template("index.html")
 
 
-@app.route("/live")
-def live() -> str:
+@app.route("/life")
+def life() -> str:
     game = GameOfLife()
     game.form_new_generation()
     return render_template(
-        "live.html",
+        "life.html",
         life_count=game.life_count,
         world=game.world,
         prev_world=game.previous_world,
