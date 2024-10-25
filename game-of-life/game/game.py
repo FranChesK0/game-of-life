@@ -14,10 +14,7 @@ class GameOfLife(metaclass=SingletonMeta):
         self.generate_world()
 
     def __repr__(self) -> str:
-        return f"""
-        width: {self.__width}
-        height: {self.__height}
-        """
+        return f"GameOfLife<{id(self)}>[width:{self.__width}, height:{self.__height}]"
 
     def __str__(self) -> str:
         return self.__repr__()
