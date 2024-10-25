@@ -6,6 +6,10 @@
     <title>Game of Life</title>
 </head>
 <body>
+    {% extends 'base.html' %}
 
+    {% block app_content %}
+        <a class="btn btn-primary" href="{{ url_for('live') }}">Create Life</a>
+    {% endblock %}
 </body>
 </html>
