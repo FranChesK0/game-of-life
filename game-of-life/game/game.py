@@ -1,3 +1,4 @@
+import copy
 import random
 from typing import List, Tuple, Optional
 
@@ -13,6 +14,7 @@ class GameOfLife(metaclass=SingletonMeta):
 
         self.__world: List[List[bool]] = []
         self.generate_world()
+        self.__prev_world = copy.deepcopy(self.world)
 
     def __repr__(self) -> str:
         return (
@@ -31,6 +33,10 @@ class GameOfLife(metaclass=SingletonMeta):
         return self.__world
 
     @property
+    def previous_world(self) -> List[List[bool]]:
+        return self.__prev_world
+
+    @property
     def life_count(self) -> int:
         return self.__life_count
 
@@ -42,14 +48,17 @@ class GameOfLife(metaclass=SingletonMeta):
         logger.debug(f"world generated: {self}")
 
     def form_new_generation(self) -> None:
-        world = self.world
+        self.__life_count += 1
+        if self.life_count <= 0:
+            return
+
         new_world = [[False for _ in range(self.__width)] for _ in range(self.__height)]
 
-        for i in range(len(world)):
-            for j in range(len(world[0])):
-                near = self.__get_near(world, (i, j))
+        for i in range(len(self.world)):
+            for j in range(len(self.world[0])):
+                near = self.__get_near(self.world, (i, j))
 
-                if world[i][j]:
+                if self.world[i][j]:
                     if near not in (2, 3):
                         new_world[i][j] = False
                     else:
@@ -60,8 +69,8 @@ class GameOfLife(metaclass=SingletonMeta):
                 else:
                     new_world[i][j] = False
 
+        self.__prev_world = copy.deepcopy(self.world)
         self.__world = new_world
-        self.__life_count += 1
         logger.debug(f"world updated: {self}")
 
     @staticmethod
