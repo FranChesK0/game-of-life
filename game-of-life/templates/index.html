@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game of Life</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block app_content %}
+    <a class="btn btn-primary" href="{{ url_for('live') }}">Create Life</a>
+{% endblock %}
