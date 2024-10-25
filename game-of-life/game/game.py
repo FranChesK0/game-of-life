@@ -8,17 +8,21 @@ class GameOfLife(metaclass=SingletonMeta):
     def __init__(self, width: int = 20, height: int = 20) -> None:
         self.__width = width
         self.__height = height
-        self.world = self.generate_world()
+        self.generate_world()
 
-    def generate_world(self) -> List[List[bool]]:
-        return [
-            [bool(random.randint(0, 1)) for _ in range(self.__width)]
+    @property
+    def world(self) -> List[List[bool]]:
+        return self.__world
+
+    def generate_world(self) -> None:
+        self.__world = [
+            [bool(random.randint(0, 1) for _ in range(self.__width))]
             for _ in range(self.__height)
         ]
 
-    def form_new_generation(self) -> List[List[bool]]:
+    def form_new_generation(self) -> None:
         world = self.world
-        new_world = [[0 for _ in range(self.__width)] for _ in range(self.__height)]
+        new_world = [[False for _ in range(self.__width)] for _ in range(self.__height)]
 
         for i in range(len(world)):
             for j in range(len(world[0])):
@@ -35,7 +39,7 @@ class GameOfLife(metaclass=SingletonMeta):
                 else:
                     new_world[i][j] = False
 
-        return self.world
+        self.__world = new_world
 
     @staticmethod
     def __get_near(
