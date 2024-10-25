@@ -1,6 +1,8 @@
+import copy
 import random
 from typing import List, Tuple, Optional
 
+from core import logger
 from utils import SingletonMeta
 
 
@@ -8,23 +10,55 @@ class GameOfLife(metaclass=SingletonMeta):
     def __init__(self, width: int = 20, height: int = 20) -> None:
         self.__width = width
         self.__height = height
-        self.world = self.generate_world()
+        self.__life_count = 0
 
-    def generate_world(self) -> List[List[bool]]:
-        return [
+        self.__world: List[List[bool]] = []
+        self.generate_world()
+        self.__prev_world = copy.deepcopy(self.world)
+
+    def __repr__(self) -> str:
+        return (
+            f"GameOfLife<{id(self)}>["
+            f"width:{self.__width}, "
+            f"height:{self.__height}, "
+            f"life_count:{self.__life_count}"
+            "]"
+        )
+
+    def __str__(self) -> str:
+        return self.__repr__()
+
+    @property
+    def world(self) -> List[List[bool]]:
+        return self.__world
+
+    @property
+    def previous_world(self) -> List[List[bool]]:
+        return self.__prev_world
+
+    @property
+    def life_count(self) -> int:
+        return self.__life_count
+
+    def generate_world(self) -> None:
+        self.__world = [
             [bool(random.randint(0, 1)) for _ in range(self.__width)]
             for _ in range(self.__height)
         ]
+        logger.debug(f"world generated: {self}")
 
-    def form_new_generation(self) -> List[List[bool]]:
-        world = self.world
-        new_world = [[0 for _ in range(self.__width)] for _ in range(self.__height)]
+    def form_new_generation(self) -> None:
+        self.__life_count += 1
+        if self.life_count <= 0:
+            return
 
-        for i in range(len(world)):
-            for j in range(len(world[0])):
-                near = self.__get_near(world, (i, j))
+        new_world = [[False for _ in range(self.__width)] for _ in range(self.__height)]
 
-                if world[i][j]:
+        for i in range(len(self.world)):
+            for j in range(len(self.world[0])):
+                near = self.__get_near(self.world, (i, j))
+
+                if self.world[i][j]:
                     if near not in (2, 3):
                         new_world[i][j] = False
                     else:
@@ -35,7 +69,9 @@ class GameOfLife(metaclass=SingletonMeta):
                 else:
                     new_world[i][j] = False
 
-        return self.world
+        self.__prev_world = copy.deepcopy(self.world)
+        self.__world = new_world
+        logger.debug(f"world updated: {self}")
 
     @staticmethod
     def __get_near(
