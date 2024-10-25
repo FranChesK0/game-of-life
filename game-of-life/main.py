@@ -15,7 +15,7 @@ def index() -> str:
 def live() -> str:
     game = GameOfLife()
     game.form_new_generation()
-    return render_template("live.html", game=game)
+    return render_template("live.html", world=game.world)
 
 
 if __name__ == "__main__":
