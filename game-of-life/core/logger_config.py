@@ -6,7 +6,7 @@ root_directory = os.path.dirname(os.path.abspath(__file__)).removesuffix(
 logs_directory = os.path.join(root_directory, "logs")
 
 logger_config = {
-    "version": "0.1.0",
+    "version": 1,
     "formatters": {
         "console": {
             "format": "%(levelname)s - %(module)s:%(filename)s:%(lineno)s - %(message)s"
