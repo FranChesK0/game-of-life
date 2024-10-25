@@ -3,6 +3,7 @@ import os
 root_directory = os.path.dirname(os.path.abspath(__file__)).removesuffix(
     os.path.join("game-of-life", "core")
 )
+logs_directory = os.path.join(root_directory, "logs")
 
 logger_config = {
     "version": "0.1.0",
@@ -27,7 +28,7 @@ logger_config = {
             "class": "logging.FileHandler",
             "level": "ERROR",
             "formatter": "file",
-            "filename": os.path.join(root_directory, "logs", "game-of-life.log"),
+            "filename": os.path.join(logs_directory, "game-of-life.log"),
             "mode": "a",
         },
     },
