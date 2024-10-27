@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "game-of-life"
-version = "0.1.1"
+version = "0.1.2"
 description = "Game of Life written in Python and Flask framework"
 authors = ["FranChesKo"]
 license = "MIT license"
