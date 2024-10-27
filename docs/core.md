@@ -16,6 +16,7 @@ from core import config, logger
 logger.info("Starting the Game of Life application...")
 address = config.addr
 port = config.port
+secret = config.secret
 ```
 
 ## Modules Details
@@ -29,7 +30,7 @@ port = config.port
     - Creates the `logs` directory if it doesn't exist.
 3. `core/cfg.py`:
     - Manages configuration using Pydantic's `BaseSettings`.
-    - Reads configuration values from `addr` and `port` from environment variables (`GAME_OF_LIFE_ADDR` and `GAME_OF_LIFE_PORT`).
+    - Reads configuration values `addr`, `port` and `secret` from environment variables (`GAME_OF_LIFE_ADDR`, `GAME_OF_LIFE_PORT`, `GAME_OF_LIFE_SECRET`).
     - Falls back to default values if environment variables are not set or are invalid.
     - Logs warnings or errors if there are issues loading the configuration.
 4. `core/__init__.py`:
@@ -44,3 +45,4 @@ The configuration can be customized via environment variables:
 - Command-line arguments `-d` or `--debug` can be used to enable debug logging.
 - `GAME_OF_LIFE_ADDR`: Sets the address for the application (default: "0.0.0.0").
 - `GAME_OF_LIFE_PORT`: Sets the port number for the application (default: 3000).
+- `GAME_OF_LIFE_SECRET`: Sets the secret key for the application (default: auto generated string)

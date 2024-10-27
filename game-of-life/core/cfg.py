@@ -19,6 +19,10 @@ _load_addr() -> Optional[str]:
     Attempts to load the address from the `GAME_OF_LIFE_ADDR` environment variable.
     If the variable is not set, a warning is logged, and the function returns `None`.
 
+_load_secret() -> str:
+    Attempts to load the secret key from the `GAME_OF_LIFE_SECRET` environment variable.
+    If the variable is not set, an error is logged, and auto generated string returned.
+
 Classes:
 --------
 Config(BaseSettings):
@@ -35,6 +39,8 @@ Config(BaseSettings):
         if `GAME_OF_LIFE_ADDR` is not set.
     - `port` (int): The port the application will listen on. Defaults to `3000` if
         `GAME_OF_LIFE_PORT` is not set or cannot be parsed.
+    - `secret` (str): The secret key the application will be using. Defaults to auto
+        generated string if `GAME_OF_LIFE_SECRET` is not set.
 
 Attributes:
 -----------
@@ -58,8 +64,9 @@ if config.debug:
 
 Notes:
 ------
-- Ensure that environment variable `GAME_OF_LIFE_ADDRESS` and `GAME_OF_LIFE_PORT`
-    are set correctly if you want to override the default values.
+- Ensure that environment variable `GAME_OF_LIFE_ADDRESS`, `GAME_OF_LIFE_PORT`
+    and `GAME_OF_LIFE_SECRET` are set correctly if you want to override the default
+    values.
 - Command-line arguments `-d` or `--debug` will enable debug mode, which can be
     useful for development and troubleshooting.
 """
