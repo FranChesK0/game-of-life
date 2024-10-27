@@ -5,11 +5,11 @@ from wtforms.validators import NumberRange, InputRequired  # type: ignore[import
 
 class WorldSizeForm(FlaskForm):  # type: ignore[no-any-unimported]
     width = IntegerField(
-        "World width",
+        "World width (from 4 to 30)",
         validators=[NumberRange(4, 30), InputRequired()],
     )
     height = IntegerField(
-        "World height",
+        "World height (from 4 to 30)",
         validators=[NumberRange(4, 30), InputRequired()],
     )
     submit: SubmitField = SubmitField("Create")  # type: ignore[no-any-unimported]
