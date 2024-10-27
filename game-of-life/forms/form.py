@@ -12,4 +12,4 @@ class WorldSizeForm(FlaskForm):  # type: ignore[no-any-unimported]
         "World height (from 4 to 30)",
         validators=[NumberRange(4, 30), InputRequired()],
     )
-    submit: SubmitField = SubmitField("Create")  # type: ignore[no-any-unimported]
+    submit: SubmitField = SubmitField("Create life")  # type: ignore[no-any-unimported]
