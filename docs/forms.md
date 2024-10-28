@@ -8,7 +8,7 @@ This module contains forms used for receiving user data. It utilizes Flask-WTF a
 ### Attributes:
 - `width: IntegerField` - An integer field for specifying the width of the game world. It accepts values between 4 and 30 (inclusive) and is required.
 - `height: IntegerField` - An integer input field for specifying the height of the game world. It accepts values between 4 and 30 (inclusive) and is required.
-- `velocity: FloatField` - A float input field for specifying the velocity of the world generation. It accepts values between 0.1 and 5.0 (inclusive) and defaults to 1.0.
+- `velocity: FloatField` - A float input field for specifying the velocity of the world generation in seconds. It accepts values between 0.1 and 5.0 (inclusive) and defaults to 1.0.
 - `submit: SubmitField` - A button to submit the form and create the game world based on the provided dimensions.
 
 ### Usage:

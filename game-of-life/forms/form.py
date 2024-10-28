@@ -20,8 +20,9 @@ class WorldForm(FlaskForm):  # type: ignore[no-any-unimported]
         It accepts values between 4 and 30 (inclusive) and is required.
 
     velocity: FloatField
-        A float input field for specifying the velocity of the generation new world.
-        It accepts values between 0.1 and 5 (inclusive) and defaults to 1.0.
+        A float input field for specifying the velocity of the generation new world
+        in seconds.
+        It accepts values between 0.1 and 5.0 (inclusive) and defaults to 1.0.
 
     submit: SubmitField
         A button to submit the form and create the game world based on the provided
@@ -42,6 +43,7 @@ class WorldForm(FlaskForm):  # type: ignore[no-any-unimported]
         if form.validate_on_submit():
             width = form.width.data
             height = form.height.data
+            velocity = form.velocity.data
             # Proceed to create the game with specified dimensions
         return render_template("index.html", form=form)
     ```
@@ -56,7 +58,7 @@ class WorldForm(FlaskForm):  # type: ignore[no-any-unimported]
         validators=[NumberRange(4, 30), InputRequired()],
     )
     velocity = FloatField(
-        "Generation velocity (from 0.1 to 5.0)",
+        "Generation velocity in seconds (from 0.1 to 5.0)",
         validators=[NumberRange(0.1, 5.0)],
         default=1.0,
     )
