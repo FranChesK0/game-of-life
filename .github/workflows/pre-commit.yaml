@@ -17,10 +17,5 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: Install dependencies
-        run: |
-          pip install -e .
-          pip install -r dev.requirements.txt
-
       - name: Run pre-commit
-        run: pre-commit run --all-files
+        uses: pre-commit/actions@v2.0.0
