@@ -47,7 +47,7 @@ def life() -> str | Response:
         {
             "life_count": game.life_count,
             "world": game.world,
-            "prev_world": game.world,
+            "prev_world": game.previous_world,
         }
     )
 
