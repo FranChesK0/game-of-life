@@ -10,11 +10,13 @@ A singleton class that manages the state and behavior of the Game of Life. It in
 ### Attributes:
 - `__width: int` - The width of the game world grid.
 - `__height: int` - The height of the game world grid.
+- `__velocity: float` - The velocity of the world generation in seconds.
 - `__life_count: int` - The number of generations that have been created.
 - `__world: List[List[bool]]` - The current state of the game world (grid).
 - `__prev_world: List[List[bool]]` - A deep copy of the previous sate of the game world.
 
 ### Properties:
+- `velocity: float` - The velocity of the world generation in seconds.
 - `world: List[List[bool]]` - The current game world grid.
 - `previous_world: List[List[bool]]` - The previous game world grid.
 - `life_count: int` - The number of generations that have occurred.

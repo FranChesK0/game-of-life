@@ -23,7 +23,7 @@ def index() -> str | Response:
 
     form = WorldForm()
     if flask.request.method == "POST" and form.validate_on_submit():
-        GameOfLife(form.width.data, form.height.data)
+        GameOfLife(form.width.data, form.height.data, form.velocity.data)
         return flask.redirect(flask.url_for("life"))
 
     return flask.render_template(

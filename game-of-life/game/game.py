@@ -18,6 +18,8 @@ class GameOfLife(metaclass=SingletonMeta):
         The width of the game world grid.
     __height: int
         The height of the game world grid.
+    __velocity: float
+        The velocity of the world generation in seconds.
     __life_count: int
         The number of generations that have been created.
     __world: List[List[bool]]
@@ -27,6 +29,8 @@ class GameOfLife(metaclass=SingletonMeta):
 
     Properties:
     -----------
+        velocity: float
+            The velocity of the world generation in seconds.
         world: List[List[bool]]
             The current game world grid.
         previous_world: List[List[bool]]
@@ -46,7 +50,7 @@ class GameOfLife(metaclass=SingletonMeta):
     ```
     """
 
-    def __init__(self, width: int = 20, height: int = 20) -> None:
+    def __init__(self, width: int = 20, height: int = 20, velocity: float = 1.0) -> None:
         """
         Initializes a new Game of Life instance with the specific width and height,
         generating and initial random world.
@@ -57,9 +61,12 @@ class GameOfLife(metaclass=SingletonMeta):
                 The width of the game world grid (Default: 20).
             height: int
                 The height of the game world grid (Default: 20).
+            velocity: float
+                The velocity of the world generation in seconds (Default: 1.0).
         """
         self.__width = width
         self.__height = height
+        self.__velocity = velocity
         self.__life_count = 0
 
         self.__world: List[List[bool]] = []
@@ -69,12 +76,13 @@ class GameOfLife(metaclass=SingletonMeta):
     def __repr__(self) -> str:
         """
         Returns a string representation of the GameOfLife instance, including its
-        width, height, and life count.
+        width, height, velocity, and life count.
         """
         return (
             f"GameOfLife<{id(self)}>["
             f"width:{self.__width}, "
             f"height:{self.__height}, "
+            f"velocity:{self.__velocity}, "
             f"life_count:{self.__life_count}"
             "]"
         )
@@ -84,6 +92,10 @@ class GameOfLife(metaclass=SingletonMeta):
         Returns a string representation of the GameOfLife instance.
         """
         return self.__repr__()
+
+    @property
+    def velocity(self) -> float:
+        return self.__velocity
 
     @property
     def world(self) -> List[List[bool]]:
