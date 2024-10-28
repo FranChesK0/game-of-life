@@ -95,18 +95,30 @@ class GameOfLife(metaclass=SingletonMeta):
 
     @property
     def velocity(self) -> float:
+        """
+        The velocity of the world generation in seconds.
+        """
         return self.__velocity
 
     @property
     def world(self) -> List[List[bool]]:
+        """
+        The current game world grid.
+        """
         return self.__world
 
     @property
     def previous_world(self) -> List[List[bool]]:
+        """
+        The previous game world grid.
+        """
         return self.__prev_world
 
     @property
     def life_count(self) -> int:
+        """
+        The number of generations that have occurred.
+        """
         return self.__life_count
 
     def generate_world(self) -> None:
