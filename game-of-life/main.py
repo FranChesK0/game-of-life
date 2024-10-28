@@ -3,7 +3,7 @@ from werkzeug import Response
 
 from core import config
 from game import GameOfLife
-from forms import WorldSizeForm
+from forms import WorldForm
 
 
 class FlaskConfig:
@@ -21,7 +21,7 @@ def index() -> str | Response:
         flask.abort(405, "Only 'GET' and 'POST' methods allowed")
         return
 
-    form = WorldSizeForm()
+    form = WorldForm()
     if flask.request.method == "POST" and form.validate_on_submit():
         GameOfLife(form.width.data, form.height.data)
         return flask.redirect(flask.url_for("life"))

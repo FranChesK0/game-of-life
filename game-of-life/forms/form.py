@@ -1,11 +1,12 @@
-from wtforms import SubmitField, IntegerField  # type: ignore[import-untyped]
+from wtforms import FloatField, SubmitField, IntegerField  # type: ignore[import-untyped]
 from flask_wtf import FlaskForm  # type: ignore[import-untyped]
 from wtforms.validators import NumberRange, InputRequired  # type: ignore[import-untyped]
 
 
-class WorldSizeForm(FlaskForm):  # type: ignore[no-any-unimported]
+class WorldForm(FlaskForm):  # type: ignore[no-any-unimported]
     """
-    A form that allows users to specify the width and height of the game world.
+    A form that allows users to specify the width and height of the game world and
+    the velocity of the world generation.
     Both fields have input validation to ensure the values are within a valid range.
 
     Attributes:
@@ -18,6 +19,10 @@ class WorldSizeForm(FlaskForm):  # type: ignore[no-any-unimported]
         An integer input field for specifying the height of the game world.
         It accepts values between 4 and 30 (inclusive) and is required.
 
+    velocity: FloatField
+        A float input field for specifying the velocity of the generation new world.
+        It accepts values between 0.1 and 5 (inclusive) and defaults to 1.0.
+
     submit: SubmitField
         A button to submit the form and create the game world based on the provided
         dimensions.
@@ -28,12 +33,12 @@ class WorldSizeForm(FlaskForm):  # type: ignore[no-any-unimported]
     configuration the game world. For example:
 
     ```python
-    from forms import WorldSizeForm
+    from forms import WorldForm
 
 
     @app.route("/", methods=["GET", "POST"])
     def index():
-        form = WorldSizeForm()
+        form = WorldForm()
         if form.validate_on_submit():
             width = form.width.data
             height = form.height.data
@@ -49,5 +54,10 @@ class WorldSizeForm(FlaskForm):  # type: ignore[no-any-unimported]
     height = IntegerField(
         "World height (from 4 to 30)",
         validators=[NumberRange(4, 30), InputRequired()],
+    )
+    velocity = FloatField(
+        "Generation velocity (from 0.1 to 5.0)",
+        validators=[NumberRange(0.1, 5.0)],
+        default=1.0,
     )
     submit: SubmitField = SubmitField("Create life")  # type: ignore[no-any-unimported]
