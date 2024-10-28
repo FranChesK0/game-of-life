@@ -1,4 +1,7 @@
 # Game of Life
+[![pre-commit](https://github.com/FranChesK0/game-of-life/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/FranChesK0/game-of-life/actions/workflows/pre-commit.yaml)
+[![tests](https://github.com/FranChesK0/game-of-life/actions/workflows/tests.yaml/badge.svg)](https://github.com/FranChesK0/game-of-life/actions/workflows/tests.yaml)
+
 A web-based implementation of Conway's Game of Life using Python and the Flask framework.
 
 ## Features
@@ -43,9 +46,6 @@ You can customize the server's address and port, and application secret key usin
 - `GAME_OF_LIFE_ADDR`
 - `GAME_OF_LIFE_PORT`
 - `GAME_OF_LIFE_SECRET`
-
-## Contributing
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
