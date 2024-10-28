@@ -18,7 +18,7 @@ app.jinja_env.filters["zip"] = zip
 @app.route("/", methods=["GET", "POST"])
 def index() -> str | Response:
     if flask.request.method not in ("GET", "POST"):
-        flask.abort(405, "Only 'GET' and 'POST' methods")
+        flask.abort(405, "Only 'GET' and 'POST' methods allowed")
         return
 
     form = WorldSizeForm()
@@ -32,15 +32,23 @@ def index() -> str | Response:
     )
 
 
-@app.route("/life")
-def life() -> str:
+@app.route("/life", methods=["GET", "POST"])
+def life() -> str | Response:
+    if flask.request.method not in ("GET", "POST"):
+        flask.abort(405, "Only 'GET' and 'POST' methods allowed")
+        return
+
+    if flask.request.method == "GET":
+        return flask.render_template("life.html")
+
     game = GameOfLife()
     game.form_new_generation()
-    return flask.render_template(
-        "life.html",
-        life_count=game.life_count,
-        world=game.world,
-        prev_world=game.previous_world,
+    return flask.jsonify(
+        {
+            "life_count": game.life_count,
+            "world": game.world,
+            "prev_world": game.world,
+        }
     )
 
 
