@@ -38,11 +38,16 @@ def life() -> str | Response:
         flask.abort(405, "Only 'GET' and 'POST' methods allowed")
         return
 
-    if flask.request.method == "GET":
-        return flask.render_template("life.html")
-
     game = GameOfLife()
     game.form_new_generation()
+    if flask.request.method == "GET":
+        return flask.render_template(
+            "life.html",
+            velocity=game.velocity,
+            life_count=game.life_count,
+            world=game.world,
+            prev_world=game.previous_world,
+        )
     return flask.jsonify(
         {
             "life_count": game.life_count,
