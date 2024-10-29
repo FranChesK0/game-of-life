@@ -3,6 +3,9 @@
 [![tests](https://github.com/FranChesK0/game-of-life/actions/workflows/tests.yaml/badge.svg)](https://github.com/FranChesK0/game-of-life/actions/workflows/tests.yaml)
 
 A web-based implementation of Conway's Game of Life using Python and the Flask framework.
+<p align="center">
+    <img src="assets/game-of-life.png" width="500" />
+</p>
 
 ## Features
 - Interactive simulation of Conway's Game of Life.
@@ -41,6 +44,8 @@ python game-of-life/main.py
 make debug
 python game-of-life/main.py --debug
 ```
+
+Then open the app `127.0.0.1:3000`
 
 You can customize the server's address and port, and application secret key using environment variables:
 - `GAME_OF_LIFE_ADDR`
