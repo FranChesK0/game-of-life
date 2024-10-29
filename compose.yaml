@@ -1,0 +1,11 @@
+services:
+  game-of-life:
+    container_name: game-of-life
+    restart: unless-stopped
+    build:
+      context: .
+    environment:
+      - GAME_OF_LIFE_ADDR=127.0.0.1
+      - GAME_OF_LIFE_SECRET=your_secret
+    ports:
+      - 3000:3000
