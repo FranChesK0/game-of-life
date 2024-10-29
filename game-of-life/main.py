@@ -1,6 +1,5 @@
 import flask
 from werkzeug import Response
-from flask_cors import CORS, cross_origin
 
 from core import config
 from game import GameOfLife
@@ -13,8 +12,6 @@ class FlaskConfig:
 
 app = flask.Flask(__name__)
 app.config.from_object(FlaskConfig)
-cors = CORS(app)
-app.config["CORS_HEADERS"] = "Content-Type"
 app.jinja_env.filters["zip"] = zip
 
 
@@ -36,7 +33,6 @@ def index() -> str | Response:
 
 
 @app.route("/life", methods=["GET", "POST"])
-@cross_origin()
 def life() -> str | Response:
     if flask.request.method not in ("GET", "POST"):
         flask.abort(405, "Only 'GET' and 'POST' methods allowed")
