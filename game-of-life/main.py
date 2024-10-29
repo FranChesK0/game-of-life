@@ -44,7 +44,7 @@ def life() -> str | Response:
         return flask.render_template(
             "life.html",
             host=f"{addr}:{config.port}",
-            velocity=1000 * game.velocity,
+            velocity=game.velocity,
             life_count=game.life_count,
             world=game.world,
             previous_world=game.previous_world,
