@@ -39,20 +39,23 @@ def life() -> str | Response:
         return
 
     game = GameOfLife()
-    game.form_new_generation()
     if flask.request.method == "GET":
+        addr = "127.0.0.1" if config.addr == "0.0.0.0" else config.addr
         return flask.render_template(
             "life.html",
-            velocity=game.velocity,
+            host=f"{addr}:{config.port}",
+            velocity=1000 * game.velocity,
             life_count=game.life_count,
             world=game.world,
-            prev_world=game.previous_world,
+            previous_world=game.previous_world,
         )
+
+    game.form_new_generation()
     return flask.jsonify(
         {
             "life_count": game.life_count,
             "world": game.world,
-            "prev_world": game.previous_world,
+            "previous_world": game.previous_world,
         }
     )
 
