@@ -3,7 +3,7 @@ from werkzeug import Response
 
 from core import config
 from game import GameOfLife
-from forms import WorldSizeForm
+from forms import WorldForm
 
 
 class FlaskConfig:
@@ -18,12 +18,12 @@ app.jinja_env.filters["zip"] = zip
 @app.route("/", methods=["GET", "POST"])
 def index() -> str | Response:
     if flask.request.method not in ("GET", "POST"):
-        flask.abort(405, "Only 'GET' and 'POST' methods")
+        flask.abort(405, "Only 'GET' and 'POST' methods allowed")
         return
 
-    form = WorldSizeForm()
+    form = WorldForm()
     if flask.request.method == "POST" and form.validate_on_submit():
-        GameOfLife(form.width.data, form.height.data)
+        GameOfLife(form.width.data, form.height.data, form.velocity.data)
         return flask.redirect(flask.url_for("life"))
 
     return flask.render_template(
@@ -32,15 +32,31 @@ def index() -> str | Response:
     )
 
 
-@app.route("/life")
-def life() -> str:
+@app.route("/life", methods=["GET", "POST"])
+def life() -> str | Response:
+    if flask.request.method not in ("GET", "POST"):
+        flask.abort(405, "Only 'GET' and 'POST' methods allowed")
+        return
+
     game = GameOfLife()
+    if flask.request.method == "GET":
+        addr = "127.0.0.1" if config.addr == "0.0.0.0" else config.addr
+        return flask.render_template(
+            "life.html",
+            host=f"{addr}:{config.port}",
+            velocity=1000 * game.velocity,
+            life_count=game.life_count,
+            world=game.world,
+            previous_world=game.previous_world,
+        )
+
     game.form_new_generation()
-    return flask.render_template(
-        "life.html",
-        life_count=game.life_count,
-        world=game.world,
-        prev_world=game.previous_world,
+    return flask.jsonify(
+        {
+            "life_count": game.life_count,
+            "world": game.world,
+            "previous_world": game.previous_world,
+        }
     )
 
 
