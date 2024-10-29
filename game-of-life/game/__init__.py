@@ -20,6 +20,8 @@ GameOfLife(metaclass=SingletonMeta):
         The width of the game world grid.
     __height: int
         The height of the game world grid.
+    __velocity: float
+        The velocity of the world generation in seconds.
     __life_count: int
         The number of generations that have been created.
     __world: List[List[bool]]
@@ -29,6 +31,8 @@ GameOfLife(metaclass=SingletonMeta):
 
     Properties:
     -----------
+        velocity: float
+            The velocity of the world generation in seconds.
         world: List[List[bool]]
             The current game world grid.
         previous_world: List[List[bool]]

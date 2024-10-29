@@ -111,6 +111,24 @@ def _load_secret_key() -> str:
 
 
 class Config(BaseSettings):
+    """
+    A Pydantic settings class that manages the application's configuration. It reads
+    from environment variables and command-line arguments, providing a centralized
+    place for application settings.
+
+    Attributes:
+    -----------
+    - `debug` (bool): Indicates whether the application is running in debug mode.
+        This is determined by the presence of `-d` or `--debug` in the command-line
+        arguments.
+    - `addr` (str): The address the application will bind to. Defaults to "0.0.0.0"
+        if `GAME_OF_LIFE_ADDR` is not set.
+    - `port` (int): The port the application will listen on. Defaults to `3000` if
+        `GAME_OF_LIFE_PORT` is not set or cannot be parsed.
+    - `secret` (str): The secret key the application will be using. Defaults to auto
+        generated string if `GAME_OF_LIFE_SECRET` is not set.
+    """
+
     debug: bool = "-d" in sys.argv or "--debug" in sys.argv
     addr: str = _load_addr() or "0.0.0.0"
     port: int = _load_port() or 3000
