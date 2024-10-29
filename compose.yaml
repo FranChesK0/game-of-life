@@ -6,6 +6,7 @@ services:
       context: .
     environment:
       - GAME_OF_LIFE_ADDR=127.0.0.1
+      - GAME_OF_LIFE_PORT=3000
       - GAME_OF_LIFE_SECRET=your_secret
     ports:
       - 3000:3000
