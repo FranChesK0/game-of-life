@@ -184,6 +184,20 @@ async = ["asgiref (>=3.2)"]
 dotenv = ["python-dotenv"]
 
 [[package]]
+name = "flask-cors"
+version = "5.0.0"
+description = "A Flask extension adding a decorator for CORS support"
+optional = false
+python-versions = "*"
+files = [
+    {file = "Flask_Cors-5.0.0-py2.py3-none-any.whl", hash = "sha256:b9e307d082a9261c100d8fb0ba909eec6a228ed1b60a8315fd85f783d61910bc"},
+    {file = "flask_cors-5.0.0.tar.gz", hash = "sha256:5aadb4b950c4e93745034594d9f3ea6591f734bb3662e16e255ffbf5e89c88ef"},
+]
+
+[package.dependencies]
+Flask = ">=0.9"
+
+[[package]]
 name = "flask-wtf"
 version = "1.2.2"
 description = "Form rendering, validation, and CSRF protection for Flask with WTForms."
@@ -758,6 +772,20 @@ files = [
 ]
 
 [[package]]
+name = "types-flask-cors"
+version = "5.0.0.20240902"
+description = "Typing stubs for Flask-Cors"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "types-Flask-Cors-5.0.0.20240902.tar.gz", hash = "sha256:8921b273bf7cd9636df136b66408efcfa6338a935e5c8f53f5eff1cee03f3394"},
+    {file = "types_Flask_Cors-5.0.0.20240902-py3-none-any.whl", hash = "sha256:595e5f36056cd128ab905832e055f2e5d116fbdc685356eea4490bc77df82137"},
+]
+
+[package.dependencies]
+Flask = ">=2.0.0"
+
+[[package]]
 name = "typing-extensions"
 version = "4.12.2"
 description = "Backported and Experimental Type Hints for Python 3.8+"
@@ -825,4 +853,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "657d61bea51ca9eec5d76850ded2e06c65e61c9bb39067953083a1539060af4b"
+content-hash = "816c38f1b14eb23030d8e374817185344d6f44c808a202ab5151bb2c6090e94a"
