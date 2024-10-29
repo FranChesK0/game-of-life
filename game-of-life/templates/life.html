@@ -1,76 +1,36 @@
 {% extends 'base.html' %}
 
-{% block app_content %}
-    <a class="btn btn-warning home" href="{{ url_for('index') }}">Home</a>
-    <a class="btn btn-info refresh" href="{{ url_for('life') }}">Refresh</a>
+{% block title %}Simulation{% endblock %}
 
-    <div id="counter" class="counter">{{ life_count }}</div>
-    <table id="world" class="world">
-        {% for row, prev_row in world|zip(previous_world) %}
-            <tr>
-                {% for cell, prev_cell in row|zip(prev_row) %}
-                    {% if cell %}
-                        <td class="cell living-cell"></td>
-                    {% elif not cell and prev_cell %}
-                        <td class="cell dead-cell"></td>
-                    {% else %}
-                        <td class="cell"></td>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/life.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="game-container">
+        <div id="counter" class="counter">{{ life_count }}</div>
+
+        <table class="game-table" id="game-table">
+            {% for row in world %}
+                <tr>
+                    {% for cell in row %}
+                        {% if cell %}
+                            <td class="cell alive"></td>
+                        {% else %}
+                            <td class="cell"></td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <a class="home-button" href="{{ url_for('index') }}">Home</a>
+    </div>
 {% endblock %}
 
 {% block scripts %}
-    {{ super() }}
-    <script>
-        const apiUrl = "http://{{ host }}/life"
-
-        // Make POST request to api
-        async function fetchGameSate() {
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                if (!response.ok) throw new Error("API request error");
-                const data = await response.json();
-
-                // Update data on page
-                updateWorld(data.world, data.previous_world)
-                document.getElementById("counter").innerText = data.life_count;
-            } catch (error) {
-                console.error("Error: ", error)
-            }
-        }
-
-        // Update grid on page
-        function updateWorld(world, previousWorld) {
-            const worldTable = document.getElementById("world");
-            worldTable.innerHTML = '';  // Clear previous world state
-
-            for (let i = 0; i < world.length; i++) {
-                const tr = document.createElement("tr");
-                for (let j = 0; j < world[i].length; j++) {
-                    const td = document.createElement("td");
-                    td.classList.add("cell");
-
-                    if (world[i][j]) {
-                        td.classList.add("living-cell");
-                    } else if (!world[i][j] && previousWorld[i][j]) {
-                        td.classList.add("dead-cell");
-                    }
-
-                    tr.appendChild(td);
-                }
-                worldTable.appendChild(tr);
-            }
-        }
-
-        // Set auto update
-        setInterval(fetchGameSate, '{{ velocity }}');
-    </script>
+    <script>const apiUrl="http://{{ host }}/life";</script>
+    <script src="{{ url_for('static', filename='js/life.js') }}"></script>
+    <script>setInterval(fetchGameState, 1000 * '{{ velocity }}');</script>
 {% endblock %}
