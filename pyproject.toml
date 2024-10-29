@@ -60,7 +60,7 @@ show_error_codes = true
 pythonpath = ["game-of-life"]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
-addopts = ["--import-mode=importlib", "--cov"]
+addopts = ["--import-mode=importlib", "--doctest-modules", "--cov"]
 
 
 [build-system]
